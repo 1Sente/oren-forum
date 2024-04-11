@@ -16,6 +16,21 @@ datasource db {
 model QrCode {
   id String @id @default(uuid())
   qrcode String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   @@map("qr-codes")
+}
+
+model User {
+  id String @id @default(uuid())
+  fio String
+  email String @unique
+  phoneNumber String
+  organization String
+  post String
+  city String
+  district String
+
+  QrCode QrCode[]
 }
